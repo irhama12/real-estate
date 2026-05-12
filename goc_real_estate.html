@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GOC Real Estate - Pakistan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  :root {
+    --gold: #C9A84C;
+    --dark: #1A1A2E;
+    --darker: #0F0F1A;
+    --card-bg: #16213E;
+    --text: #E8E8F0;
+    --muted: #9090A8;
+    --border: rgba(201,168,76,0.2);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--darker);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* NAVBAR */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(15,15,26,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--gold);
+  }
+  .logo span { color: var(--text); }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul li a {
+    text-decoration: none; color: var(--muted);
+    font-size: 0.9rem; font-weight: 400;
+    transition: color 0.2s;
+  }
+  nav ul li a:hover { color: var(--gold); }
+  .nav-btn {
+    background: var(--gold); color: var(--darker);
+    border: none; padding: 0.5rem 1.2rem;
+    border-radius: 4px; font-weight: 500;
+    cursor: pointer; font-size: 0.9rem;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 50%, #1a1a3e 100%);
+    display: flex; align-items: center;
+    padding: 6rem 2rem 2rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -50%; right: -20%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-content { max-width: 600px; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem; letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem; line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero p {
+    color: var(--muted); font-size: 1.1rem;
+    line-height: 1.7; margin-bottom: 2rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--darker);
+    padding: 0.8rem 2rem; border: none;
+    border-radius: 4px; font-weight: 500;
+    cursor: pointer; font-size: 1rem;
+    font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.9; }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    padding: 0.8rem 2rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 4px; font-weight: 400;
+    cursor: pointer; font-size: 1rem;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* STATS */
+  .stats {
+    background: var(--card-bg);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 2rem;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    text-align: center; gap: 1rem;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; color: var(--gold); font-weight: 600;
+  }
+  .stat-label { color: var(--muted); font-size: 0.85rem; margin-top: 0.3rem; }
+
+  /* SEARCH */
+  .search-section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; margin-bottom: 0.5rem;
+  }
+  .section-sub { color: var(--muted); margin-bottom: 2rem; }
+  .search-bar {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.5rem;
+    display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end;
+  }
+  .search-field { flex: 1; min-width: 150px; }
+  .search-field label {
+    display: block; font-size: 0.8rem;
+    color: var(--muted); margin-bottom: 0.4rem;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .search-field select, .search-field input {
+    width: 100%;
+    background: var(--darker);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.6rem 0.8rem;
+    border-radius: 4px; font-size: 0.95rem;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+  }
+  .search-field select:focus, .search-field input:focus {
+    border-color: var(--gold);
+  }
+
+  /* PROPERTIES */
+  .properties-section { padding: 2rem 2rem 4rem; max-width: 1200px; margin: 0 auto; }
+  .filter-tabs { display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .filter-tab {
+    padding: 0.4rem 1rem; border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent; color: var(--muted);
+    cursor: pointer; font-size: 0.85rem;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .filter-tab.active, .filter-tab:hover {
+    background: var(--gold); color: var(--darker);
+    border-color: var(--gold); font-weight: 500;
+  }
+  .properties-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  .property-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .property-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(201,168,76,0.5);
+  }
+  .prop-img {
+    height: 200px; position: relative;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+  }
+  .prop-img.house { background: linear-gradient(135deg, #1a3a2a, #0f2018); }
+  .prop-img.flat { background: linear-gradient(135deg, #1a1a3a, #0f0f28); }
+  .prop-img.plot { background: linear-gradient(135deg, #3a2a1a, #281a0f); }
+  .prop-badge {
+    position: absolute; top: 1rem; left: 1rem;
+    background: var(--gold); color: var(--darker);
+    font-size: 0.75rem; font-weight: 500;
+    padding: 0.25rem 0.7rem; border-radius: 3px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .prop-price {
+    position: absolute; bottom: 1rem; right: 1rem;
+    background: rgba(15,15,26,0.9);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+  }
+  .prop-body { padding: 1.2rem; }
+  .prop-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; margin-bottom: 0.3rem;
+  }
+  .prop-location {
+    color: var(--muted); font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  .prop-location span { color: var(--gold); }
+  .prop-features {
+    display: flex; gap: 1rem;
+    padding: 0.8rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1rem;
+  }
+  .prop-feat { font-size: 0.82rem; color: var(--muted); }
+  .prop-feat strong { color: var(--text); display: block; font-size: 0.9rem; }
+  .prop-actions { display: flex; gap: 0.6rem; }
+  .btn-view {
+    flex: 1; padding: 0.6rem;
+    background: var(--gold); color: var(--darker);
+    border: none; border-radius: 4px;
+    cursor: pointer; font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; transition: opacity 0.2s;
+  }
+  .btn-view:hover { opacity: 0.85; }
+  .btn-whatsapp {
+    padding: 0.6rem 0.8rem;
+    background: #25D366; color: white;
+    border: none; border-radius: 4px;
+    cursor: pointer; font-size: 0.85rem;
+    font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.2s;
+  }
+  .btn-whatsapp:hover { opacity: 0.85; }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none; position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 200; align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--dark);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem; width: 90%; max-width: 500px;
+  }
+  .modal h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; margin-bottom: 0.3rem;
+  }
+  .modal-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .form-group { margin-bottom: 1rem; }
+  .form-group label {
+    display: block; font-size: 0.8rem;
+    color: var(--muted); margin-bottom: 0.4rem;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .form-group input {
+    width: 100%;
+    background: var(--darker);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.7rem 0.9rem;
+    border-radius: 4px; font-size: 0.95rem;
+    font-family: 'DM Sans', sans-serif; outline: none;
+  }
+  .form-group input:focus { border-color: var(--gold); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .modal-actions { display: flex; gap: 0.8rem; margin-top: 1.5rem; }
+  .btn-cancel {
+    flex: 1; padding: 0.7rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted); border-radius: 4px;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+  }
+  .btn-book {
+    flex: 2; padding: 0.7rem;
+    background: var(--gold); color: var(--darker);
+    border: none; border-radius: 4px;
+    cursor: pointer; font-weight: 500;
+    font-family: 'DM Sans', sans-serif; font-size: 1rem;
+  }
+  .success-msg {
+    display: none; text-align: center; padding: 1rem 0;
+  }
+  .success-msg .tick {
+    font-size: 3rem; margin-bottom: 1rem;
+  }
+  .success-msg h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .success-msg p { color: var(--muted); font-size: 0.9rem; }
+
+  /* FOOTER */
+  footer {
+    background: var(--card-bg);
+    border-top: 1px solid var(--border);
+    padding: 2rem; text-align: center;
+    color: var(--muted); font-size: 0.85rem;
+  }
+  footer span { color: var(--gold); }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 2.2rem; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    nav ul { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">GOC <span>Real Estate</span></div>
+  <ul>
+    <li><a href="#">Properties</a></li>
+    <li><a href="#">Cities</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <button class="nav-btn" onclick="document.querySelector('.search-section').scrollIntoView({behavior:'smooth'})">Find Property</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Pakistan's Premier Real Estate</div>
+    <h1>Find Your Dream Property in <span>Pakistan</span></h1>
+    <p>Explore premium houses, flats, and plots across Lahore, Karachi, Islamabad and beyond. Book a viewing in minutes.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.querySelector('.properties-section').scrollIntoView({behavior:'smooth'})">Browse Properties</button>
+      <button class="btn-outline" onclick="openWhatsApp()">WhatsApp Us</button>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div><div class="stat-num">500+</div><div class="stat-label">Properties Listed</div></div>
+  <div><div class="stat-num">12</div><div class="stat-label">Cities Covered</div></div>
+  <div><div class="stat-num">98%</div><div class="stat-label">Client Satisfaction</div></div>
+  <div><div class="stat-num">10+</div><div class="stat-label">Years Experience</div></div>
+</div>
+
+<section class="search-section">
+  <h2 class="section-title">Search Properties</h2>
+  <p class="section-sub">Filter by city, type and budget to find your match</p>
+  <div class="search-bar">
+    <div class="search-field">
+      <label>City</label>
+      <select id="cityFilter" onchange="filterProperties()">
+        <option value="">All Cities</option>
+        <option value="Lahore">Lahore</option>
+        <option value="Karachi">Karachi</option>
+        <option value="Islamabad">Islamabad</option>
+        <option value="Rawalpindi">Rawalpindi</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label>Property Type</label>
+      <select id="typeFilter" onchange="filterProperties()">
+        <option value="">All Types</option>
+        <option value="House">House</option>
+        <option value="Flat">Flat</option>
+        <option value="Plot">Plot</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label>Max Budget (Crore)</label>
+      <select id="budgetFilter" onchange="filterProperties()">
+        <option value="">Any Budget</option>
+        <option value="1">Up to 1 Crore</option>
+        <option value="2">Up to 2 Crore</option>
+        <option value="5">Up to 5 Crore</option>
+        <option value="10">Up to 10 Crore</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label>Bedrooms</label>
+      <select id="bedsFilter" onchange="filterProperties()">
+        <option value="">Any</option>
+        <option value="1">1 Bed</option>
+        <option value="2">2 Beds</option>
+        <option value="3">3 Beds</option>
+        <option value="4">4+ Beds</option>
+      </select>
+    </div>
+    <button class="btn-primary" onclick="filterProperties()">Search</button>
+  </div>
+</section>
+
+<section class="properties-section">
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="setTab(this,'')">All</button>
+    <button class="filter-tab" onclick="setTab(this,'House')">Houses</button>
+    <button class="filter-tab" onclick="setTab(this,'Flat')">Flats</button>
+    <button class="filter-tab" onclick="setTab(this,'Plot')">Plots</button>
+  </div>
+  <div class="properties-grid" id="propertiesGrid"></div>
+</section>
+
+<!-- Booking Modal -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal">
+    <div id="bookingForm">
+      <h3>Book a Viewing</h3>
+      <p class="modal-sub" id="modalPropName">Loading property details...</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="clientName" placeholder="Ali Ahmed">
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="text" id="clientPhone" placeholder="03001234567">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="clientEmail" placeholder="ali@gmail.com">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Preferred Date</label>
+          <input type="date" id="viewDate">
+        </div>
+        <div class="form-group">
+          <label>Preferred Time</label>
+          <input type="time" id="viewTime">
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+        <button class="btn-book" onclick="submitBooking()">Confirm Booking</button>
+      </div>
+    </div>
+    <div class="success-msg" id="successMsg">
+      <div class="tick">✅</div>
+      <h4>Viewing Booked!</h4>
+      <p>We'll confirm via WhatsApp and email shortly.<br>Our agent will meet you at the property.</p>
+      <br>
+      <button class="btn-book" onclick="closeModal()" style="width:100%">Done</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p><span>GOC Real Estate</span> — Pakistan's Trusted Property Network &nbsp;|&nbsp; WhatsApp: <span>03188273891</span> &nbsp;|&nbsp; © 2026</p>
+</footer>
+
+<script>
+const properties = [
+  { id:1, title:"5 Marla House", address:"DHA Phase 5, Lahore", city:"Lahore", type:"House", price:1.8, beds:4, baths:3, area:"5 Marla", emoji:"🏠", badge:"For Sale" },
+  { id:2, title:"10 Marla House", address:"Gulberg III, Lahore", city:"Lahore", type:"House", price:3.5, beds:5, baths:4, area:"10 Marla", emoji:"🏡", badge:"Featured" },
+  { id:3, title:"2 Bed Luxury Flat", address:"Bahria Town, Lahore", city:"Lahore", type:"Flat", price:0.85, beds:2, baths:2, area:"1200 sqft", emoji:"🏢", badge:"For Sale" },
+  { id:4, title:"1 Kanal Plot", address:"DHA Phase 6, Lahore", city:"Lahore", type:"Plot", price:4.5, beds:0, baths:0, area:"1 Kanal", emoji:"🌿", badge:"Plot" },
+  { id:5, title:"3 Bed Apartment", address:"Clifton Block 5, Karachi", city:"Karachi", type:"Flat", price:1.2, beds:3, baths:2, area:"1800 sqft", emoji:"🏙️", badge:"For Sale" },
+  { id:6, title:"7 Marla House", address:"F-10, Islamabad", city:"Islamabad", type:"House", price:2.9, beds:4, baths:3, area:"7 Marla", emoji:"🏘️", badge:"Featured" },
+  { id:7, title:"5 Marla Plot", address:"Bahria Town Phase 8, Rawalpindi", city:"Rawalpindi", type:"Plot", price:0.65, beds:0, baths:0, area:"5 Marla", emoji:"🟫", badge:"Plot" },
+  { id:8, title:"Studio Flat", address:"Gulshan-e-Iqbal, Karachi", city:"Karachi", type:"Flat", price:0.45, beds:1, baths:1, area:"650 sqft", emoji:"🏬", badge:"For Sale" },
+  { id:9, title:"1 Kanal House", address:"Model Town, Lahore", city:"Lahore", type:"House", price:7.5, beds:6, baths:5, area:"1 Kanal", emoji:"🏰", badge:"Luxury" },
+];
+
+let activeType = '';
+let selectedProp = null;
+
+function formatPrice(p) {
+  if(p >= 1) return p + ' Crore';
+  return (p * 100).toFixed(0) + ' Lakh';
+}
+
+function renderCards(list) {
+  const grid = document.getElementById('propertiesGrid');
+  if(list.length === 0) {
+    grid.innerHTML = '<p style="color:var(--muted);grid-column:1/-1;text-align:center;padding:3rem">No properties found. Try different filters.</p>';
+    return;
+  }
+  grid.innerHTML = list.map(p => `
+    <div class="property-card">
+      <div class="prop-img ${p.type.toLowerCase()}">
+        <span style="font-size:3.5rem">${p.emoji}</span>
+        <div class="prop-badge">${p.badge}</div>
+        <div class="prop-price">PKR ${formatPrice(p.price)}</div>
+      </div>
+      <div class="prop-body">
+        <div class="prop-title">${p.title}</div>
+        <div class="prop-location">📍 <span>${p.city}</span> — ${p.address}</div>
+        <div class="prop-features">
+          ${p.beds > 0 ? `<div class="prop-feat"><strong>${p.beds}</strong>Beds</div>` : ''}
+          ${p.baths > 0 ? `<div class="prop-feat"><strong>${p.baths}</strong>Baths</div>` : ''}
+          <div class="prop-feat"><strong>${p.area}</strong>Size</div>
+          <div class="prop-feat"><strong>${p.type}</strong>Type</div>
+        </div>
+        <div class="prop-actions">
+          <button class="btn-view" onclick="openBooking(${p.id})">📅 Book Viewing</button>
+          <button class="btn-whatsapp" onclick="whatsappProp(${p.id})">WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterProperties() {
+  const city = document.getElementById('cityFilter').value;
+  const type = document.getElementById('typeFilter').value || activeType;
+  const budget = parseFloat(document.getElementById('budgetFilter').value) || 999;
+  const beds = parseInt(document.getElementById('bedsFilter').value) || 0;
+
+  let filtered = properties.filter(p => {
+    if(city && p.city !== city) return false;
+    if(type && p.type !== type) return false;
+    if(p.price > budget) return false;
+    if(beds && p.beds < beds) return false;
+    return true;
+  });
+  renderCards(filtered);
+}
+
+function setTab(el, type) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  activeType = type;
+  document.getElementById('typeFilter').value = type;
+  filterProperties();
+}
+
+function openBooking(id) {
+  selectedProp = properties.find(p => p.id === id);
+  document.getElementById('modalPropName').textContent = selectedProp.title + ' — ' + selectedProp.address;
+  document.getElementById('bookingForm').style.display = 'block';
+  document.getElementById('successMsg').style.display = 'none';
+  document.getElementById('bookingModal').classList.add('open');
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('viewDate').min = today;
+}
+
+function closeModal() {
+  document.getElementById('bookingModal').classList.remove('open');
+  document.getElementById('clientName').value = '';
+  document.getElementById('clientPhone').value = '';
+  document.getElementById('clientEmail').value = '';
+  document.getElementById('viewDate').value = '';
+  document.getElementById('viewTime').value = '';
+}
+
+function submitBooking() {
+  const name = document.getElementById('clientName').value.trim();
+  const phone = document.getElementById('clientPhone').value.trim();
+  const email = document.getElementById('clientEmail').value.trim();
+  const date = document.getElementById('viewDate').value;
+  const time = document.getElementById('viewTime').value;
+
+  if(!name || !phone || !email || !date || !time) {
+    alert('Please fill in all fields to confirm your viewing.');
+    return;
+  }
+
+  document.getElementById('bookingForm').style.display = 'none';
+  document.getElementById('successMsg').style.display = 'block';
+
+  const msg = `Hi GOC Real Estate! I want to book a viewing.\n\n🏠 Property: ${selectedProp.title}\n📍 Address: ${selectedProp.address}\n\n👤 Name: ${name}\n📞 Phone: ${phone}\n📧 Email: ${email}\n📅 Date: ${date}\n⏰ Time: ${time}`;
+  setTimeout(() => {
+    window.open('https://wa.me/923188273891?text=' + encodeURIComponent(msg), '_blank');
+  }, 1000);
+}
+
+function whatsappProp(id) {
+  const p = properties.find(x => x.id === id);
+  const msg = `Hi! I'm interested in: ${p.title} at ${p.address} (PKR ${formatPrice(p.price)}). Please share more details.`;
+  window.open('https://wa.me/923188273891?text=' + encodeURIComponent(msg), '_blank');
+}
+
+function openWhatsApp() {
+  window.open('https://wa.me/923188273891?text=Hi GOC Real Estate! I am looking for a property.', '_blank');
+}
+
+renderCards(properties);
+</script>
+</body>
+</html>
