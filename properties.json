@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {"id":1,"title":"5 Marla House","address":"DHA Phase 5, Lahore","city":"Lahore","type":"House","price":"1.8 Crore","beds":4,"available":true},
+    {"id":2,"title":"10 Marla House","address":"Gulberg III, Lahore","city":"Lahore","type":"House","price":"3.5 Crore","beds":5,"available":true},
+    {"id":3,"title":"2 Bed Flat","address":"Bahria Town, Lahore","city":"Lahore","type":"Flat","price":"85 Lakh","beds":2,"available":true},
+    {"id":4,"title":"1 Kanal Plot","address":"DHA Phase 6, Lahore","city":"Lahore","type":"Plot","price":"4.5 Crore","beds":0,"available":true},
+    {"id":5,"title":"3 Bed Apartment","address":"Clifton Block 5, Karachi","city":"Karachi","type":"Flat","price":"1.2 Crore","beds":3,"available":true}
+  ]
+}
